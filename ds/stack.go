@@ -9,12 +9,12 @@ func NewStack() *Stack {
 	return &Stack{}
 }
 
-func (s *Stack) Push(val int) {
+func (s *Stack) Push(val interface{}) {
 	s.top = NewNode(val, s.top)
 	s.N++
 }
 
-func (s *Stack) Pop() int {
+func (s *Stack) Pop() interface{} {
 	val := s.top.val
 	s.top = s.top.next
 	s.N--

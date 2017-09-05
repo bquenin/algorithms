@@ -1,10 +1,8 @@
 package ds
 
 type Node struct {
-	val  int
+	val  interface{}
 	next *Node
 }
 
-func NewNode(val int, next *Node) *Node {
-	return &Node{val, next}
-}
+func NewNode(val interface{}, next *Node) *Node { return &Node{val, next} }

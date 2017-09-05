@@ -20,14 +20,14 @@ func NewBFS(g *ds.Graph, source int) *BFS {
 
 func (bfs *BFS) bfs(g *ds.Graph) {
 	// Nodes to visit
-	q := ds.NewQueue()
+	q := ds.NewListQueue()
 
 	// Mark the source as visited and enqueue it
 	bfs.visited[bfs.source] = true
 	q.Enqueue(bfs.source)
 
 	for !q.Empty() {
-		from := q.Dequeue()              // Get vertex 'from'
+		from := q.Dequeue().(int)        // Get vertex 'from'
 		for _, to := range g.Adj(from) { // Visit adjacencies 'to'
 			if !bfs.visited[to] {
 				bfs.backtrack[to] = from // Store the path between 'from' and 'to' in order to backtrack
