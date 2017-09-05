@@ -1,5 +1,7 @@
 package search
 
+import "github.com/bquenin/algorithms/ds"
+
 type trieNode struct {
 	next  map[uint8]*trieNode
 	match bool
@@ -59,18 +61,18 @@ func (t *Trie) CountKeysWithPrefix(prefix string) int {
 	return node.size
 }
 
-func (t *Trie) Keys() Queue {
+func (t *Trie) Keys() ds.Queue {
 	return t.KeysWithPrefix("")
 }
 
-func (t *Trie) KeysWithPrefix(prefix string) Queue {
-	results := NewArrayQueue()
+func (t *Trie) KeysWithPrefix(prefix string) ds.Queue {
+	results := ds.NewArrayQueue()
 	node := t.get(t.root, prefix, 0)
 	t.collect(node, prefix, results)
 	return results
 }
 
-func (t *Trie) collect(node *trieNode, prefix string, results Queue) {
+func (t *Trie) collect(node *trieNode, prefix string, results ds.Queue) {
 	if node == nil {
 		return
 	}

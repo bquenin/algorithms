@@ -2,16 +2,14 @@ package sort
 
 import (
 	"container/heap"
-
-	"github.com/bquenin/algorithms/ds"
 )
 
 type RunningMedian struct {
-	low, high *ds.IntPQ
+	low, high *IntPQ
 }
 
 func NewRunningMedian() *RunningMedian {
-	return &RunningMedian{low: ds.NewIntMaxPQ(), high: ds.NewIntMinPQ()}
+	return &RunningMedian{low: NewIntMaxPQ(), high: NewIntMinPQ()}
 }
 
 func (rm *RunningMedian) Add(val int) {

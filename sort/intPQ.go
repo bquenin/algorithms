@@ -1,4 +1,4 @@
-package ds
+package sort
 
 type IntPQ struct {
 	values []int
