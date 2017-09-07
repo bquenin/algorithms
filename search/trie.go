@@ -17,11 +17,7 @@ type Trie struct {
 func NewTrie() *Trie { return &Trie{} }
 
 func (t *Trie) Contains(key string) bool {
-	x := t.get(t.root, key, 0)
-	if x == nil {
-		return false
-	}
-	return true
+	return t.Get(key) != nil
 }
 
 func (t *Trie) Get(key string) interface{} {
