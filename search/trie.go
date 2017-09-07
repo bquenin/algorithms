@@ -4,7 +4,7 @@ import "github.com/bquenin/algorithms/ds"
 
 type trieNode struct {
 	next  map[uint8]*trieNode
-	match bool
+	value interface{}
 	size  int
 }
 
@@ -24,6 +24,14 @@ func (t *Trie) Contains(key string) bool {
 	return true
 }
 
+func (t *Trie) Get(key string) interface{} {
+	x := t.get(t.root, key, 0)
+	if x == nil {
+		return nil
+	}
+	return x.value
+}
+
 func (t *Trie) get(node *trieNode, key string, index int) *trieNode {
 	if node == nil {
 		return nil
@@ -35,21 +43,21 @@ func (t *Trie) get(node *trieNode, key string, index int) *trieNode {
 	return t.get(node.next[c], key, index+1)
 }
 
-func (t *Trie) Put(key string) {
-	t.root = t.put(t.root, key, 0)
+func (t *Trie) Put(key string, value interface{}) {
+	t.root = t.put(t.root, key, value, 0)
 }
 
-func (t *Trie) put(node *trieNode, key string, index int) *trieNode {
+func (t *Trie) put(node *trieNode, key string, value interface{}, index int) *trieNode {
 	if node == nil {
 		node = NewTrieNode()
 	}
 	node.size++
 	if index == len(key) {
-		node.match = true
+		node.value = value
 		return node
 	}
 	c := key[index]
-	node.next[c] = t.put(node.next[c], key, index+1)
+	node.next[c] = t.put(node.next[c], key, value, index+1)
 	return node
 }
 
@@ -76,7 +84,7 @@ func (t *Trie) collect(node *trieNode, prefix string, results ds.Queue) {
 	if node == nil {
 		return
 	}
-	if node.match {
+	if node.value != nil {
 		results.Enqueue(prefix)
 	}
 	for k, v := range node.next {

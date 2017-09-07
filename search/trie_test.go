@@ -9,8 +9,8 @@ import (
 func TestTrie(t *testing.T) {
 	input := []string{"she", "sells", "sea", "shells", "by", "the", "sea", "shore"}
 	trie := NewTrie()
-	for _, word := range input {
-		trie.Put(word)
+	for i, word := range input {
+		trie.Put(word, i)
 	}
 	for _, word := range input {
 		assert.True(t, trie.Contains(word))
