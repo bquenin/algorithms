@@ -6,7 +6,7 @@ func LRS(s string) string {
 	for i := 1; i < n; i++ {
 		length := sa.LCP(i)
 		if length > len(lrs) {
-			lrs = s[sa[i].Index : sa[i].Index+length]
+			lrs = sa[i][:length]
 		}
 	}
 	return lrs
