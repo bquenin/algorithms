@@ -1,15 +1,16 @@
-package sort
+package math
 
 import (
 	"container/heap"
+	"github.com/bquenin/algorithms/sort"
 )
 
 type RunningMedian struct {
-	low, high *IntPQ
+	low, high *sort.IntPQ
 }
 
 func NewRunningMedian() *RunningMedian {
-	return &RunningMedian{low: NewIntMaxPQ(), high: NewIntMinPQ()}
+	return &RunningMedian{low: sort.NewIntMaxPQ(), high: sort.NewIntMinPQ()}
 }
 
 func (rm *RunningMedian) Add(val int) {
@@ -27,7 +28,6 @@ func (rm *RunningMedian) Add(val int) {
 func (rm *RunningMedian) Current() float64 {
 	if rm.high.Len() > rm.low.Len() {
 		return float64(rm.high.Peek())
-	} else {
-		return float64(rm.high.Peek()+rm.low.Peek()) / 2
 	}
+	return float64(rm.high.Peek()+rm.low.Peek()) / 2
 }
