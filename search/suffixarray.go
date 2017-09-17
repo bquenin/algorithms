@@ -23,4 +23,9 @@ func NewSuffixArray(s string) SuffixArray {
 	return sa
 }
 
-func (sa *SuffixArray) LCP(i int) int { return len(LCP((*sa)[i-1].Text, (*sa)[i].Text)) }
+func (sa *SuffixArray) LCP(i int) int {
+	if i <= 0 || i >= len(*sa) {
+		return -1
+	}
+	return len(LCP((*sa)[i-1].Text, (*sa)[i].Text))
+}
