@@ -1,4 +1,4 @@
-package search
+package string
 
 import (
 	"testing"
@@ -27,7 +27,7 @@ func TestDictionaryAndLetters(t *testing.T) {
 	for i, word := range dictionary {
 		trie.Put(word, i)
 	}
-	matched := trie.KeysContainingLetters(letters).ToArray()
+	matched := trie.KeysContainingAlphabet(letters).ToArray()
 	assert.Len(t, matched, 3)
 	assert.Contains(t, matched, "me")
 	assert.Contains(t, matched, "go")

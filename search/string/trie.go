@@ -1,4 +1,4 @@
-package search
+package string
 
 import (
 	"github.com/bquenin/algorithms/ds"
@@ -83,17 +83,17 @@ func (t *Trie) collect(node *trieNode, prefix string, results ds.Queue) {
 	}
 }
 
-func (t *Trie) KeysContainingLetters(letters []byte) ds.Queue {
+func (t *Trie) KeysContainingAlphabet(alphabet []byte) ds.Queue {
 	results := ds.NewArrayQueue()
 	hash := make([]bool, 26)
-	for _, letter := range letters {
+	for _, letter := range alphabet {
 		hash[letter-'a'] = true
 	}
-	t.keysContainingLetters(t.root, "", hash, results)
+	t.keysContainingAlphabet(t.root, "", hash, results)
 	return results
 }
 
-func (t *Trie) keysContainingLetters(node *trieNode, prefix string, hash []bool, results ds.Queue) {
+func (t *Trie) keysContainingAlphabet(node *trieNode, prefix string, hash []bool, results ds.Queue) {
 	if node == nil {
 		return
 	}
@@ -102,7 +102,7 @@ func (t *Trie) keysContainingLetters(node *trieNode, prefix string, hash []bool,
 	}
 	for k := range node.next {
 		if hash[k-'a'] {
-			t.keysContainingLetters(node.next[k], prefix+string(k), hash, results)
+			t.keysContainingAlphabet(node.next[k], prefix+string(k), hash, results)
 		}
 	}
 }
