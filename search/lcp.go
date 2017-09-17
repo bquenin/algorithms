@@ -9,7 +9,7 @@ func LCP(strings ...string) string {
 		c := strings[0][i]
 		for j := 1; j < len(strings); j++ {
 			if i == len(strings[j]) || strings[j][i] != c {
-				return strings[0][:i+1]
+				return strings[0][:i]
 			}
 		}
 	}

@@ -9,4 +9,5 @@ import (
 func TestLRS(t *testing.T) {
 	assert.Equal(t, "abra", LRS("abracadabra"))
 	assert.Equal(t, "to be", LRS("to be or not to be"))
+	assert.Equal(t, "abc", LRS("abcabcddd"))
 }
