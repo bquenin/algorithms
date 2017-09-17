@@ -1,4 +1,4 @@
-package string
+package search
 
 // LCP Longest Common Prefix using vertical scanning
 func LCP(strings ...string) string {

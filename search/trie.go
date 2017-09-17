@@ -1,4 +1,4 @@
-package string
+package search
 
 import (
 	"github.com/bquenin/algorithms/ds"

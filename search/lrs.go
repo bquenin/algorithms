@@ -1,4 +1,4 @@
-package string
+package search
 
 // LRS Longest Repeating Substring
 func LRS(s string) string {
