@@ -1,41 +1,24 @@
 package search
 
-import (
-	"github.com/bquenin/algorithms/math"
-	"sort"
-)
+import "sort"
 
-type SuffixArray []string
+type Suffix struct {
+	Text  string
+	Index int
+}
+
+type SuffixArray []*Suffix
+
+func (t SuffixArray) Len() int           { return len(t) }
+func (t SuffixArray) Swap(i, j int)      { t[i], t[j] = t[j], t[i] }
+func (t SuffixArray) Less(i, j int) bool { return t[i].Text < t[j].Text }
 
 func NewSuffixArray(s string) SuffixArray {
-	sa := make([]string, len(s))
-	for i := 0; i < len(s); i++ {
-		sa[i] = s[i:]
-	}
-	sort.Strings(sa)
-	return sa
-}
-func (sa SuffixArray) LCPArray() []int {
-	lcp := make([]int, len(sa))
-	for i := 1; i < len(sa); i++ {
-		lcp[i] = sa.LCP(i)
-	}
-	return lcp
-}
-
-func (sa SuffixArray) LCP(i int) int {
-	if i <= 0 || i >= len(sa) {
-		return -1
-	}
-	return sa.lcp(sa[i-1], sa[i])
-}
-
-func (sa SuffixArray) lcp(s, t string) int {
-	n := math.Min(len(s), len(t))
+	n := len(s)
+	sa := make(SuffixArray, n)
 	for i := 0; i < n; i++ {
-		if s[i] != t[i] {
-			return i
-		}
+		sa[i] = &Suffix{s[i:], i}
 	}
-	return n
+	sort.Sort(sa)
+	return sa
 }
