@@ -2,7 +2,7 @@ package search
 
 // LCP Longest Common Prefix using vertical scanning
 func LCP(strings ...string) string {
-	if strings == nil || len(strings) == 0 {
+	if len(strings) == 0 {
 		return ""
 	}
 	for i := 0; i < len(strings[0]); i++ {
